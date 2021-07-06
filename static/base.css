@@ -1,0 +1,20 @@
+.PinkBroccoli_header_logo{
+    margin: 2rem 0;
+    font-family: 'Zen Tokyo Zoo', cursive;
+}
+
+.PinkBroccoli_header_button{
+    margin-bottom: 2rem;
+}
+
+.PinkBroccoli_footer_logo{
+    margin: 1.5rem 0;
+    font-family: 'Rubik', sans-serif;
+}
+
+.PinkBroccoli_footer_button{
+    margin-top: 2rem;
+    font-family: 'Rubik', sans-serif;
+    font-size: 15px
+}
+
