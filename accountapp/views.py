@@ -17,9 +17,13 @@ def hello_world(request):
         # 객체를 DB에 저장    # temp와 다르게 DB에 저장됨(왼쪽 파일 목록 db.sqlite3)
         # settings.py의 DATABASE 내용 확인 해보면 지정된걸 확인할수있음
 
+        hello_world_list = HelloWorld.objects.all()
+        # DB의 모든 데이터를 hello_world_list에 넣어줌
+
         return render(request, 'accountapp/hello_world.html',
-                      context={'new_hello_world': new_hello_world})
+                      context={'hello_world_list': hello_world_list})
     else:
+        hello_world_list = HelloWorld.objects.all()
         return render(request, 'accountapp/hello_world.html',
-                      context={'text': 'GET METHOD!'})
+                      context={'hello_world_list': 'hello_world_list'})
 
