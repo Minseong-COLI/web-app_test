@@ -18,4 +18,32 @@
     {# STATIC FILES LINK #}
     <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
 
+    {# src: local -> 로컬에 있으면 가져오고, 없으면 url: ~ 로 불러온다  #}
+    <style>
+        @font-face {
+            font-family: 'NanumSquareR';
+            src: local('NanumSquareR'),
+            url("{% static 'fonts/NanumSquareR.otf' %}") format("opentype");
+        }
+
+        @font-face {
+            font-family: 'NanumSquareEB';
+            src: local('NanumSquareEB'),
+            url("{% static 'fonts/NanumSquareEB.otf' %}") format("opentype");
+        }
+
+        @font-face {
+            font-family: 'NanumSquareB';
+            src: local('NanumSquareB'),
+            url("{% static 'fonts/NanumSquareB.otf' %}") format("opentype");
+        }
+
+        @font-face {
+            font-family: 'NanumSquareL';
+            src: local('NanumSquareL'),
+            url("{% static 'fonts/NanumSquareL.otf' %}") format("opentype");
+        }
+    </style>
+
 </head>
+

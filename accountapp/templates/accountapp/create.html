@@ -12,9 +12,9 @@
         <div>
             <form action="{% url 'accountapp:create' %}" method="post">
                 {% csrf_token %}
-{#                {{ form }}      # bootstrap_form 사용을 위해 대체#}
+                {# {{ form }}      # bootstrap_form 사용을 위해 대체#}
                 {% bootstrap_form form %}
-                <div>
+                <div class="m-5">
                     <input type="submit" class="btn btn-dark rounded-pill px-5">
                 </div>
             </form>
