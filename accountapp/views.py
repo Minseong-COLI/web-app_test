@@ -111,3 +111,4 @@ class AccountDeleteView(DeleteView):
             # return HttpResponseRedirect(reverse('accountapp:login'))
             return HttpResponseForbidden()
             # 금지된 경로로 들어갔다는걸 알림
+
