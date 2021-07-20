@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
@@ -8,31 +8,34 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from accountapp.models import HelloWorld
-from accountapp.templates.accountapp.forms import AccountCreationForm
+from accountapp.forms import AccountCreationForm
 
 
 def hello_world(request):
-    if request.method == "POST":
+    if request.user.is_authenticated:
+        # 로그인 여부 확인
+        if request.method == "POST":
+            temp = request.POST.get('input_text')
 
-        temp = request.POST.get('input_text')
+            new_hello_world = HelloWorld()
+            new_hello_world.text = temp
+            new_hello_world.save()
+            # 객체를 DB에 저장    # temp와 다르게 DB에 저장됨(왼쪽 파일 목록 db.sqlite3)
+            # settings.py의 DATABASE 내용 확인 해보면 지정된걸 확인할수있음
 
-        new_hello_world = HelloWorld()
-        new_hello_world.text = temp
-        new_hello_world.save()
-        # 객체를 DB에 저장    # temp와 다르게 DB에 저장됨(왼쪽 파일 목록 db.sqlite3)
-        # settings.py의 DATABASE 내용 확인 해보면 지정된걸 확인할수있음
+            return HttpResponseRedirect(reverse('accountapp:hello_world'))
 
-        return HttpResponseRedirect(reverse('accountapp:hello_world'))
-
-        # hello_world_list = HelloWorld.objects.all()
-        # # DB의 모든 데이터를 hello_world_list에 넣어줌
-        #
-        # return render(request, 'accountapp/hello_world.html',
-        #               context={'hello_world_list': hello_world_list})
+            # hello_world_list = HelloWorld.objects.all()
+            # # DB의 모든 데이터를 hello_world_list에 넣어줌
+            #
+            # return render(request, 'accountapp/hello_world.html',
+            #               context={'hello_world_list': hello_world_list})
+        else:
+            hello_world_list = HelloWorld.objects.all()
+            return render(request, 'accountapp/hello_world.html',
+                          context={'hello_world_list': hello_world_list})
     else:
-        hello_world_list = HelloWorld.objects.all()
-        return render(request, 'accountapp/hello_world.html',
-                      context={'hello_world_list': hello_world_list})
+        return HttpResponseRedirect(reverse('accountapp:login'))
 
 
 class AccountCreateView(CreateView):
@@ -43,6 +46,20 @@ class AccountCreateView(CreateView):
     # 완료 후 이동 페이지
     template_name = 'accountapp/create.html'
 
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            # 로그인 여부 확인
+            return super().get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('accountapp:login'))
+
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            # 로그인 여부 확인
+            return super().get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('accountapp:login'))
+
 
 class AccountDetailView(DetailView):
     model = User
@@ -51,10 +68,25 @@ class AccountDetailView(DetailView):
     # user를 타겟으로 가져온다
     template_name = 'accountapp/detail.html'
 
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            # 로그인 여부 확인
+            return super().get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('accountapp:login'))
+
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            # 로그인 여부 확인
+            return super().get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('accountapp:login'))
+
 
 class AccountUpdateView(UpdateView):
     model = User
     form_class = AccountCreationForm
+    # ID는 수정되지 않도록 AccountCreationForm 클래스를 정의해줌(forms.py)
     context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:detail')
     # 완료 후 이동 페이지
