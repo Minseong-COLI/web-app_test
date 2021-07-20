@@ -46,20 +46,6 @@ class AccountCreateView(CreateView):
     # 완료 후 이동 페이지
     template_name = 'accountapp/create.html'
 
-    def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            # 로그인 여부 확인
-            return super().get(request, *args, **kwargs)
-        else:
-            return HttpResponseRedirect(reverse('accountapp:login'))
-
-    def post(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            # 로그인 여부 확인
-            return super().get(request, *args, **kwargs)
-        else:
-            return HttpResponseRedirect(reverse('accountapp:login'))
-
 
 class AccountDetailView(DetailView):
     model = User
@@ -67,20 +53,6 @@ class AccountDetailView(DetailView):
     context_object_name = 'target_user'
     # user를 타겟으로 가져온다
     template_name = 'accountapp/detail.html'
-
-    def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            # 로그인 여부 확인
-            return super().get(request, *args, **kwargs)
-        else:
-            return HttpResponseRedirect(reverse('accountapp:login'))
-
-    def post(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            # 로그인 여부 확인
-            return super().get(request, *args, **kwargs)
-        else:
-            return HttpResponseRedirect(reverse('accountapp:login'))
 
 
 class AccountUpdateView(UpdateView):
@@ -93,9 +65,33 @@ class AccountUpdateView(UpdateView):
     # pk를 입력해줘야 구동이 됨
     template_name = 'accountapp/update.html'
 
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return super().get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('accountapp:login'))
+
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return super().get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('accountapp:login'))
+
 
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'accountapp/delete.html'
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return super().get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('accountapp:login'))
+
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return super().get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('accountapp:login'))
