@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render
 
 # Create your views here.
@@ -66,16 +66,24 @@ class AccountUpdateView(UpdateView):
     template_name = 'accountapp/update.html'
 
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and self.get_object() == request.user:
+            # 1. 로그인 되었는지 확인
+            # 2. request.user(로그인 된 ID)가 get_object(target_user)와 동일한지 확인
             return super().get(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect(reverse('accountapp:login'))
+            # return HttpResponseRedirect(reverse('accountapp:login'))
+            return HttpResponseForbidden()
+            # 금지된 경로로 들어갔다는걸 알림
 
     def post(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and self.get_object() == request.user:
+            # 1. 로그인 되었는지 확인
+            # 2. request.user(로그인 된 ID)가 get_object(target_user)와 동일한지 확인
             return super().get(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect(reverse('accountapp:login'))
+            # return HttpResponseRedirect(reverse('accountapp:login'))
+            return HttpResponseForbidden()
+            # 금지된 경로로 들어갔다는걸 알림
 
 
 class AccountDeleteView(DeleteView):
@@ -85,13 +93,21 @@ class AccountDeleteView(DeleteView):
     template_name = 'accountapp/delete.html'
 
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and self.get_object() == request.user:
+            # 1. 로그인 되었는지 확인
+            # 2. request.user(로그인 된 ID)가 get_object(target_user)와 동일한지 확인
             return super().get(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect(reverse('accountapp:login'))
+            # return HttpResponseRedirect(reverse('accountapp:login'))
+            return HttpResponseForbidden()
+            # 금지된 경로로 들어갔다는걸 알림
 
     def post(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and self.get_object() == request.user:
+            # 1. 로그인 되었는지 확인
+            # 2. request.user(로그인 된 ID)가 get_object(target_user)와 동일한지 확인
             return super().get(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect(reverse('accountapp:login'))
+            # return HttpResponseRedirect(reverse('accountapp:login'))
+            return HttpResponseForbidden()
+            # 금지된 경로로 들어갔다는걸 알림
