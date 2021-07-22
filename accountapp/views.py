@@ -9,6 +9,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
+from accountapp.decorators import account_ownership_required
 from accountapp.models import HelloWorld
 from accountapp.forms import AccountCreationForm
 
@@ -58,8 +59,15 @@ class AccountDetailView(DetailView):
     template_name = 'accountapp/detail.html'
 
 
-@method_decorator(login_required, 'get')
-@method_decorator(login_required, 'post')
+has_ownership = [login_required, account_ownership_required]
+# method_decorator 는 단일 데코레이터 뿐 아니라 리스트 데코레이터도 받을 수 있음
+
+
+# @method_decorator(login_required, 'get')
+# @method_decorator(login_required, 'post')
+# @method_decorator(account_ownership_required, 'get')
+# @method_decorator(account_ownership_required, 'post')
+@method_decorator(has_ownership, 'get')
 class AccountUpdateView(UpdateView):
     model = User
     form_class = AccountCreationForm
@@ -91,8 +99,11 @@ class AccountUpdateView(UpdateView):
     #         # 금지된 경로로 들어갔다는걸 알림
 
 
-@method_decorator(login_required, 'get')
-@method_decorator(login_required, 'post')
+# @method_decorator(login_required, 'get')
+# @method_decorator(login_required, 'post')
+# @method_decorator(account_ownership_required, 'get')
+# @method_decorator(account_ownership_required, 'post')
+@method_decorator(has_ownership, 'get')
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user'
