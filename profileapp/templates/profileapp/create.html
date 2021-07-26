@@ -10,7 +10,11 @@
             </h4>
         </div>
         <div>
-            <form action="{% url 'profileapp:create' %}" method="post">
+            <form action="{% url 'profileapp:create' %}"
+                  enctype="multipart/form-data"
+                  method="post">
+                # enctype: enctype 속성은 폼 데이터(form data)가 서버로 제출될 때 해당 데이터가 인코딩되는 방법을 명시합니다
+                # multipart/form-data 이 방식은 form 요소가 파일이나 이미지를 서버로 전송할 때 주로 사용함.
                 {% csrf_token %}
                 {% bootstrap_form form %}
                 <div class="m-5">
