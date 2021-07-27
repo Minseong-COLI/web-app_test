@@ -6,11 +6,13 @@
         <div class="m-5">
             {% if target_user.profile %}
                 {# 해당 유저의 프로필이 있는지 여부 확인 #}
-                <img src="{{ target_user.profile.image.url }}" alt="profile image">
+                <img src="{{ target_user.profile.image.url }}"
+                     class="profile_image m-4"
+                     alt="profile image">
                 {# alt: altanative(?) 대체제 -> 이미지를 못 가져왔을때 나오는 텍스트 #}
-                <h4>{{ target_user.profile.nickname }}
+                <h2 class="NNS_B">{{ target_user.profile.nickname }}
                     {# {{ target_user.username }} #}
-                </h4>
+                </h2>
                 <h5>{{ target_user.profile.message }}</h5>
             {% else %}
                 <h4>

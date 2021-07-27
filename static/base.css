@@ -23,3 +23,17 @@
     max-width: 500px;
     padding: 1rem 1.5rem;
 }
+
+.profile_image{
+    height: 12rem;
+    width: 12rem;
+    border-radius: 20rem;
+    object-fit: cover;
+}
+/* 높이와 너비보다 border-radius를 크게하면 동그란 모양이 된다*/
+/* object-fit: cover : 사진 비율을 맞춰줌 */
+
+.NNS_B{
+    font-family: "NanumSquareB", cursive;
+}
+/* 나눔스퀘어 글씨체가 없으면 cursive로 보여줌*/
