@@ -10,8 +10,12 @@
                      class="profile_image m-4"
                      alt="profile image">
                 {# alt: altanative(?) 대체제 -> 이미지를 못 가져왔을때 나오는 텍스트 #}
-                <h2 class="NNS_B">{{ target_user.profile.nickname }}
+                <h2 class="NNS_B">
+                    {{ target_user.profile.nickname }}
                     {# {{ target_user.username }} #}
+                    <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}"
+                       edit
+                    </a>
                 </h2>
                 <h5>{{ target_user.profile.message }}</h5>
             {% else %}
