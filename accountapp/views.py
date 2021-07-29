@@ -74,10 +74,14 @@ class AccountUpdateView(UpdateView):
     form_class = AccountCreationForm
     # ID는 수정되지 않도록 AccountCreationForm 클래스를 정의해줌(forms.py)
     context_object_name = 'target_user'
-    success_url = reverse_lazy('accountapp:detail')
+    # success_url = reverse_lazy('accountapp:detail')
     # 완료 후 이동 페이지
     # pk를 입력해줘야 구동이 됨
     template_name = 'accountapp/update.html'
+
+    def get_success_url(self):
+        return reverse('accountapp:detail', kwargs={'pk': self.object.pk})
+
 
     # def get(self, request, *args, **kwargs):
     #     if request.user.is_authenticated and self.get_object() == request.user:
