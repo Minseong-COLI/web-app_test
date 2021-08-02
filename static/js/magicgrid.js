@@ -282,4 +282,13 @@ let magicGrid = new MagicGrid({
   useMin: true
 });
 
+// masonrys : 비대칭 벽돌형 구조
+var masonrys = document.getElementsByTagName("img")
+
+for (let i=0; i < masonrys.length; i++) {
+  masonrys[i].addEventListener('load',function () {
+    magicGrid.positionItems();
+  }, false)
+}
+
 magicGrid.listen();
