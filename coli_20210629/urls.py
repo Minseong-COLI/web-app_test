@@ -23,7 +23,9 @@ import accountapp
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accountapp.urls')),
-    path('profiles/', include('profileapp.urls'))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('profiles/', include('profileapp.urls')),
+    path('articles/', include('articleapp.urls'))
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 # MEDIA_URL로 경로를 들어왔을때 MEDIA_ROOT에 있는 파일을 제공 하겠다
 
