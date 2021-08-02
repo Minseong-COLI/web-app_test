@@ -18,7 +18,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-import accountapp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +25,6 @@ urlpatterns = [
     path('profiles/', include('profileapp.urls')),
     path('articles/', include('articleapp.urls'))
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # MEDIA_URL로 경로를 들어왔을때 MEDIA_ROOT에 있는 파일을 제공 하겠다
 
