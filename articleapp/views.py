@@ -60,4 +60,5 @@ class ArticleListView(ListView):
     context_object_name = 'article_list'
     # article_list를 통해 접근
     template_name = 'articleapp/list.html'
-    paginate_by = 20
+    paginate_by = 1
+    # 한 페이지에 나올 게시글 숫자
