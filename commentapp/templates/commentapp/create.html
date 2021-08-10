@@ -9,7 +9,7 @@
         <div>
             <form action="{% url 'commentapp:create' %}" method="post">
                 {% csrf_token %}
-                {# {{ form }}      # bootstrap_form 사용을 위해 대체#}
+                {# {{ form }}      # bootstrap_form 사용을 위해 대체 #}
                 {% bootstrap_form form %}
                 <input type="hidden"
                        name="article_pk"

@@ -17,7 +17,7 @@ class CommentCreateView(CreateView):
         form.instance.writer = self.request.user
         form.instance.article_id = self.request.POST.get('article_pk')
         return super().form_valid(form)
-    # 검증이 완료 되고 나서 작성자, 작성자 id 를 user와 article_pk로부터 받아오기
+    # 검증이 완료 되고 나서 comment 작성자, 작성자 id 를 user와 article_pk로부터 받아오기
 
     def get_success_url(self):
         return reverse('articleapp:detail', kwargs={'pk': self.object.article.pk})
