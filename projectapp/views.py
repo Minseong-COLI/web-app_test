@@ -34,6 +34,7 @@ class ProjectDetailView(DetailView, MultipleObjectMixin):
         # self.object = 'target_project'와 동일
         return super().get_context_data(object_list=article_list, **kwargs)
 
+
 class ProjectListView(ListView):
     model = Project
     context_object_name = 'project_list'
