@@ -17,3 +17,5 @@ class Article(models.Model):
     content = models.TextField(null=True)
     created_at = models.DateField(auto_now_add=True, null=True)
     # 작성 시간 자동입력
+
+    like = models.IntegerField(default=0)
