@@ -16,39 +16,11 @@ from accountapp.forms import AccountCreationForm
 from articleapp.models import Article
 
 
-@login_required(login_url=reverse_lazy('accountapp:login'))
-def hello_world(request):
-    # if request.user.is_authenticated:
-        # 로그인 여부 확인
-    if request.method == "POST":
-        temp = request.POST.get('input_text')
-
-        new_hello_world = HelloWorld()
-        new_hello_world.text = temp
-        new_hello_world.save()
-        # 객체를 DB에 저장    # temp와 다르게 DB에 저장됨(왼쪽 파일 목록 db.sqlite3)
-        # settings.py의 DATABASE 내용 확인 해보면 지정된걸 확인할수있음
-
-        return HttpResponseRedirect(reverse('accountapp:hello_world'))
-
-        # hello_world_list = HelloWorld.objects.all()
-        # # DB의 모든 데이터를 hello_world_list에 넣어줌
-        #
-        # return render(request, 'accountapp/hello_world.html',
-        #               context={'hello_world_list': hello_world_list})
-    else:
-        hello_world_list = HelloWorld.objects.all()
-        return render(request, 'accountapp/hello_world.html',
-                      context={'hello_world_list': hello_world_list})
-    # else:
-    #     return HttpResponseRedirect(reverse('accountapp:login'))
-
-
 class AccountCreateView(CreateView):
     model = User
     # user 객체를 읽어온다
     form_class = UserCreationForm
-    success_url = reverse_lazy('accountapp:hello_world')
+    success_url = reverse_lazy('articleapp:list')
     # 완료 후 이동 페이지
     template_name = 'accountapp/create.html'
 
@@ -121,7 +93,7 @@ class AccountUpdateView(UpdateView):
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user'
-    success_url = reverse_lazy('accountapp:hello_world')
+    success_url = reverse_lazy('articleapp:list')
     template_name = 'accountapp/delete.html'
 
     # def get(self, request, *args, **kwargs):
