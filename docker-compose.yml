@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  nginx:
+    image: nginx:1.19.5
+    ports:
+      - 80:80
+    networks:
+      - pinkbroccoli_network
+    volumes:
+      - /home/ubuntu/nginx.conf:/etc/nginx/nginx.conf
+      - pinkbroccoli_static:/data/static/
+      - pinkbroccoli_media:/data/media/
+
+  django:
+    image: pinkbroccoli:3
+    networks:
+      - pinkbroccoli_network
+    volumes:
+      - pinkbroccoli_static:/home/web-app_test/staticfiles/
+      - pinkbroccoli_media:/home/web-app_test/media/
+
+
+networks:
+  pinkbroccoli_network:
+
+
+volumes:
+  pinkbroccoli_static:
+  pinkbroccoli_media:
