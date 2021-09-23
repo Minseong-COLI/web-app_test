@@ -13,12 +13,24 @@ services:
       - pinkbroccoli_media:/data/media/
 
   django:
-    image: pinkbroccoli:3
+    image: pinkbroccoli:4
     networks:
       - pinkbroccoli_network
     volumes:
       - pinkbroccoli_static:/home/web-app_test/staticfiles/
       - pinkbroccoli_media:/home/web-app_test/media/
+
+  mariadb:
+    image: mariadb:10.5
+    networks:
+      - pinkbroccoli_network
+    volumes:
+      - pinkbroccoli_mariadb:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: 1234
+      MARIADB_DATABASE: django
+      MARIADB_USER: django
+      MARIADB_PASSWORD: 1234
 
 
 networks:
@@ -28,3 +40,4 @@ networks:
 volumes:
   pinkbroccoli_static:
   pinkbroccoli_media:
+  pinkbroccoli_mariadb:
