@@ -13,7 +13,7 @@ services:
       - pinkbroccoli_media:/data/media/
 
   django:
-    image: pinkbroccoli:4
+    image: pinkbroccoli:5
     networks:
       - pinkbroccoli_network
     volumes:
