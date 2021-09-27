@@ -19,6 +19,8 @@ services:
     volumes:
       - pinkbroccoli_static:/home/web-app_test/staticfiles/
       - pinkbroccoli_media:/home/web-app_test/media/
+    secrets:
+      - DJANGO_SECRET_KEY
 
   mariadb:
     image: mariadb:10.5
@@ -41,3 +43,8 @@ volumes:
   pinkbroccoli_static:
   pinkbroccoli_media:
   pinkbroccoli_mariadb:
+
+
+secrets:
+  DJANGO_SECRET_KEY:
+    external: true
