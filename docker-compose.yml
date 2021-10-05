@@ -11,6 +11,7 @@ services:
       - /home/ubuntu/nginx.conf:/etc/nginx/nginx.conf
       - pinkbroccoli_static:/data/static/
       - pinkbroccoli_media:/data/media/
+      - pinkbroccoli_log:/var/log/nginx/
 
   django:
     image: pinkbroccoli:5
@@ -49,6 +50,7 @@ volumes:
   pinkbroccoli_static:
   pinkbroccoli_media:
   pinkbroccoli_mariadb:
+  pinkbroccoli_log:
 
 
 secrets:
